@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+foreign:
+  idp:
+    # Pointing to the mock endpoint we are about to create below
+    jwks-url: "http://localhost:8080/mock-idp/.well-known/jwks.json"
+
+spring:
+  application:
+    name: uidai-interoperability-gateway
