@@ -18,10 +18,6 @@ public class TokenTranslationService {
     private final TokenGeneratorService tokenGeneratorService;
     private final String jwksUrlStr;
 
-    // Lazily initialized on first use — avoids a startup race condition where
-    // RemoteJWKSet tries to fetch the JWKS before the embedded HTTP server is
-    // ready to serve /mock-idp/.well-known/jwks.json, resulting in an empty
-    // cached key set that can never verify any token.
     private volatile ConfigurableJWTProcessor<SecurityContext> jwtProcessor;
 
     public TokenTranslationService(
@@ -39,7 +35,7 @@ public class TokenTranslationService {
                     // RemoteJWKSet provides built-in caching and automatic re-fetch on key
                     // rotation: if a kid is not found in the cache, Nimbus re-fetches the
                     // JWKS endpoint before failing. A brief network outage won't fail every
-                    // request — the cached key set continues to serve until the TTL expires.
+                    // request.
                     URL jwksUrl = new URL(jwksUrlStr);
                     JWKSource<SecurityContext> keySource = new RemoteJWKSet<>(jwksUrl);
 

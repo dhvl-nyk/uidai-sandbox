@@ -1,5 +1,6 @@
-package com.uidai.sandbox.mock;
+package com.uidai.sandbox.controller;
 
+import com.uidai.sandbox.mock.MockForeignIdpService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,13 +18,13 @@ public class MockIdpController {
         this.mockIdpService = mockIdpService;
     }
 
-    // This is the endpoint your TokenTranslationService dynamically reaches out to
+    // This is the endpoint TokenTranslationService dynamically reaches out to
     @GetMapping("/.well-known/jwks.json")
     public Map<String, Object> getJwks() {
         return mockIdpService.getJwks();
     }
 
-    // A helper endpoint so you can easily generate a valid token to test your API
+    // A helper endpoint to generate a valid token to test
     @GetMapping("/generate-test-token")
     public ResponseEntity<Map<String, String>> generateToken() {
         try {

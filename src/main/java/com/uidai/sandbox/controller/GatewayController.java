@@ -31,7 +31,6 @@ public class GatewayController {
     // Global Exception Handling for Security Events
     @ExceptionHandler(SecurityException.class)
     public ResponseEntity<?> handleSecurityFailure(SecurityException ex) {
-        // Log the exact error securely (e.g., to Kafka) without exposing stack traces to the client
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                 .body(Map.of("error", "Authentication failed. Trust could not be verified."));
     }

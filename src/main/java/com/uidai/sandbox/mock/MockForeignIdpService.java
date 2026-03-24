@@ -14,7 +14,6 @@ import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 import java.util.Map;
-import java.util.UUID;
 
 @Service
 public class MockForeignIdpService {
